@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="image.mapper.AlterImageMapper">
+
+	
+	<insert id="insertImage" parameterType="image.pojo.ImageList" >
+		insert into image_list(id,title,author,img_src,create_time,upload_time,user_id) values(#{id},#{title},#{author},#{img_src},#{create_time},#{upload_time},#{user_id})
+	</insert>
+
+	<update id="updateIsPassTrue" parameterType="int">
+		update image_list set is_pass=2 where id=#{v}
+	</update>
+	<update id="updateIsPassFalse" parameterType="int">
+		update image_list set is_pass=1 where id=#{v}
+	</update>
+	
+	<update id="updateIsPubTrue" parameterType="int">
+		update image_list set is_pub=2 where id=#{v}
+	</update>
+	
+	<update id="updateIsPubFalse" parameterType="int">
+		update image_list set is_pub=1 where id=#{v}
+	</update>
+</mapper>
