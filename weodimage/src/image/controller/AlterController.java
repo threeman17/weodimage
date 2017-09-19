@@ -1,6 +1,7 @@
 package image.controller;
 
 import java.io.File;
+import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,10 @@ public class AlterController {
 	 */
 	@RequestMapping("/uploadImage.action")
 	@ResponseBody
-	public Object updateItemById(MultipartFile pictureFile,String title) throws Exception {
+	public Object updateItemById(MultipartFile pictureFile,ImageList image) throws Exception {
 		// 图片上传
 		// 设置图片名称，不能重复，可以使用uuid
 		
-		System.out.println(title);
 		String picName = UUID.randomUUID().toString();
 
 		// 获取文件名
@@ -47,11 +47,10 @@ public class AlterController {
 		// 开始上传
 		pictureFile.transferTo(new File("D:/workspace/pic/" + picName + extName));
 	
-		ImageList imageList = new ImageList();
-		imageList.setAuthor("张四");
-		imageList.setTitle("455");
-		
-		imageAlterService.insertImage(imageList);
+		image.setImg_src("http://localhost:8080/pic/"+picName + extName);
+		image.setCreate_time(new Date());
+		image.setUpload_time(new Date());
+		imageAlterService.insertImage(image);
 		
 		return E3Rusult.ok();
 	}
