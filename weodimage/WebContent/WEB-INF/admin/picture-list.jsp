@@ -222,9 +222,10 @@ function picture_shenhe(obj,id){
 		 layer.prompt({title: '请说明未通过原因，系统将发送邮件给用户', formType: 2}, function(text, index){
 		    layer.close(index);
 		    id=$(obj).parents("tr").find(".image-id").text();
+			var author=$(obj).parents("tr").find("tr td:eq(3)").text();
 		    $.ajax({
 		    	type:"get",
-		    	url:"http://localhost:8080/weodimage/admin/isPassFalse.action?id="+id+"&emaill"+text,
+		    	url:"http://localhost:8080/weodimage/admin/isPassFalse.action?id="+id+"&email=cewin95@foxmail.com&text="+text+"&author="+author,
 		    	async:true,
 		    	success:function(){
 		    		$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">审核未通过</span>');
@@ -324,6 +325,9 @@ layer.photos({
   photos: '.text-c'
   ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
 }); 
+
+
+/*获得用户信息*/
 </script>
 </body>
 </html>
